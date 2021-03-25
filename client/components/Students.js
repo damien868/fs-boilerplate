@@ -1,15 +1,20 @@
 import React from 'react'
 
-export default class Students extends React.Component{
-    constructor(){
-        super()
-        this.state={}
-    }
-    render(){
-        return(
-            <div>
-                Hello Students
-            </div>
-        )
-    }
+ const Students=(props)=>{
+    return(
+        <div>
+            {props.students.map(student=>{
+                return(
+                    <div className='student' key={student.id}>
+                        <div>{`${student.firstName} ${student.lastName}`}</div>
+                        <div>{student.email}</div>
+                    </div>
+                )
+            })}
+            {console.log(props)}
+            
+        </div>
+    )
 }
+
+export default Students
