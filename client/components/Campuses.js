@@ -5,4 +5,11 @@ export default class Campuses extends React.Component{
         super()
         this.state={}
     }
+    render(){
+        return(
+            <div>
+                Hello Campuses
+            </div>
+        )
+    }
 }

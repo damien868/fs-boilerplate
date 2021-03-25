@@ -1,8 +1,10 @@
 const campusRouter = require("express").Router()
+const Campus=require('../db/models/campusModel')
 
 campusRouter.get('/',async(req,res,next)=>{
     try{
-        res.send('campuses go here')
+        const campuses=await Campus.findAll()
+        res.send(campuses)
     }
     catch(err){
         next(err)
