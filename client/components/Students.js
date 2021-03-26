@@ -10,9 +10,7 @@ import React from 'react'
                         <div>{student.email}</div>
                     </div>
                 )
-            })}
-            {console.log(props)}
-            
+            })}            
         </div>
     )
 }

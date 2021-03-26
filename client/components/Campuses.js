@@ -10,9 +10,7 @@ import React from 'react'
                             <div>{campus.address}</div>
                         </div>
                     )
-                })}
-                {console.log(props)}
-                
+                })}                
             </div>
         )    
 }

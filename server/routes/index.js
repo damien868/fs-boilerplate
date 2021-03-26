@@ -4,7 +4,7 @@ const path=require('path')
 const studentsRouter=require('./studentsRouter')
 const campusRouter=require('./campusRouter')
 //routes go here
-router.use('/students',studentsRouter)
+router.use('/student',studentsRouter)
 router.use('/campus',campusRouter)
 router.get('/',async(req,res,next)=>{
     try{
