@@ -1,17 +1,34 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
- const Campuses =(props)=>{
-        return(
-            <div>
-                {props.campuses.map(campus=>{
-                    return(
-                        <div className='campus' key={campus.id}>
-                            <div>{campus.name}</div>
-                            <div>{campus.address}</div>
-                        </div>
-                    )
-                })}                
-            </div>
-        )    
+
+ class Campuses extends React.Component {
+        render(){
+            return(
+                this.props.campuses ?
+                <div>
+                    <div className='heading'>Campus Directory</div>
+                <table>
+                    <tr>
+                        <th>Campus Name</th>
+                        <th>Campus Address</th>
+                    </tr>
+                    {this.props.campuses.map(campus=>{
+                        return(
+                            <tr className='campus' key={campus.id}>
+                                <th ><a href={`/#/campuses/${campus.id}`}>{campus.name}</a></th>
+                                <th>{campus.address}</th>
+                            </tr>
+                        )
+                    })}                
+                </table>
+            </div>                 
+        : <div>Loading</div>)   
+    }
 }
-export default Campuses
+const mapStateToProps = (state)=>({
+    students:state.students,
+    campuses:state.campuses
+})
+
+export default connect(mapStateToProps)(Campuses)

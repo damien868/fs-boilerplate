@@ -39,6 +39,10 @@ const Student=db.define('student',{
             }
         }
     },
+    campusInfo:{
+        type:Sequelize.DataTypes.STRING,
+        defaultValue:'Sorry this information is unavailable at this time'
+    },
 })
 
 //define any class or instance methods
