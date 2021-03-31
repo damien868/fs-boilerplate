@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "mocha \"**/*.spec.js\"",
 		"build": "webpack",
-		"build:dev": "webpack -w",
+		"build:dev": "webpack -w --mode=development",
 		"//": "this is a comment(need the //). this will never finish running which is why you need the single ampersand!!",
 		"start": "node server/index.js",
 		"start:dev": "npm run build:dev & nodemon --ignore client --ignore server/public"
@@ -24,6 +24,7 @@
 		"react-redux": "^7.2.3",
 		"react-router-dom": "^5.2.0",
 		"redux": "^4.0.5",
+		"redux-thunk": "^2.3.0",
 		"sequelize": "^6.3.4",
 		"volleyball": "^1.5.1"
 	},

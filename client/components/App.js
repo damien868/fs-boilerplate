@@ -6,8 +6,11 @@ import Home from './Home'
 import axios from 'axios'
 import {HashRouter,Route,Link} from 'react-router-dom'
 import {combineReducers, createStore} from 'redux'
-import {Provider} from 'react-redux'
+import {connect} from 'react-redux'
 import SingleStudent from "./SingleStudent"
+import SingleCampus from "./SingleCampus"
+import store from '../store/store'
+import {getStudents,getCampuses} from '../store/store'
 
 //reducer function tells you what the initial state of the store is
 // reducer is given two arguments, state and action
@@ -35,31 +38,33 @@ import SingleStudent from "./SingleStudent"
 // 	students:studentReducer,
 // 	campuses:campusReducer
 // })
-// const store=createStore(rootReducer) //createStore expects one argument which is the reducer. 
+// const store=createStore(rootReducer) //createStore expects two arguments which is the reducer and then the middleware which is usually thunks. 
 
-let initialState={students:[],campuses:[]}
-function reducer (state=initialState,action) {
-	if(action.type==='UPDATE'){
-		//return state
-		return {...state,campuses:action.campuses,students:action.students}
-	}
-	return state
-} 
-const store=createStore(reducer) //createStore expects one argument which is the reducer. 
+// let initialState={students:[],campuses:[]}
+// function reducer (state=initialState,action) {
+// 	if(action.type==='UPDATE'){
+// 		//return state
+// 		return {...state,campuses:action.campuses,students:action.students}
+// 	}
+// 	return state
+// } 
+// const store=createStore(reducer) //createStore expects one argument which is the reducer. 
 
 
-export default class App extends React.Component {
+class App extends React.Component {
 	//constructor
 	constructor(){
 		super()
 	}
 	//any lifecycle methods
 	async componentDidMount(){
-        let response=await axios.get(`/campus`)
-        const allCampus=response.data
-		response=await axios.get(`/student`)
-		const allStudent=response.data
-		store.dispatch({type:'UPDATE',students:allStudent,campuses:allCampus})
+        // let response=await axios.get(`/campus`)
+        // const allCampus=response.data
+		// response=await axios.get(`/student`)
+		// const allStudent=response.data
+		// store.dispatch({type:'UPDATE',students:allStudent,campuses:allCampus})
+		this.props.getStudents()
+		this.props.getCampuses()
 	}
 	
 	//any custom methods
@@ -68,7 +73,7 @@ export default class App extends React.Component {
 		return(
 			// In order to make store available to componenets, wrap everything in render function with Provider
 			// Provider takes one argument which is your store.
-			<Provider store={store}> 
+		
 				<HashRouter>
 					<Route exact path='/'>
 						<div className='navbar'>
@@ -89,7 +94,7 @@ export default class App extends React.Component {
 							<div><Link to='/'>Home</Link></div>
 							<div><Link to='/students'>All Students</Link></div>
 						</div> 
-						<Campuses/> 
+						<SingleCampus/> 
 					</Route> {/*react-router v5 syntax*/}
 					<Route exact path='/students'> 
 						<div className='navbar'>
@@ -106,7 +111,14 @@ export default class App extends React.Component {
 						<SingleStudent/> 
 					</Route> {/*react-router v5 syntax*/}
 				</HashRouter>
-			</Provider>
 		)
 	}
 }
+
+const mapDispatchToProps=(dispatch)=>{ //returns object which contains list of functions
+	return {
+		getStudents:()=>{dispatch(getStudents())},
+		getCampuses:()=>{dispatch(getCampuses())}
+	}
+}
+export default connect(null,mapDispatchToProps)(App) // App will only connect once you export it so you cannot use Provider here
