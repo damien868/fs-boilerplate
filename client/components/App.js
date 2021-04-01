@@ -5,11 +5,9 @@ import Students from './Students'
 import Home from './Home'
 import axios from 'axios'
 import {HashRouter,Route,Link} from 'react-router-dom'
-import {combineReducers, createStore} from 'redux'
 import {connect} from 'react-redux'
 import SingleStudent from "./SingleStudent"
 import SingleCampus from "./SingleCampus"
-import store from '../store/store'
 import {getStudents,getCampuses} from '../store/store'
 
 //reducer function tells you what the initial state of the store is
