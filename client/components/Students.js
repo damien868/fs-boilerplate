@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
                     {props.students.map(student=>{
                         return(
                             <tr className='student' key={student.id}>
-                                <th><a href={`/#/students/${student.id}`}>{`${student.firstName} ${student.lastName}`}</a></th>
+                                <th><button>X</button><a href={`/#/students/${student.id}`}>{`${student.firstName} ${student.lastName}`}</a></th>
                                 <th>{student.email}</th>
                             </tr>
                         )

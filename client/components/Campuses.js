@@ -18,7 +18,7 @@ import {connect} from 'react-redux'
                         {this.props.campuses.map(campus=>{
                             return(
                                 <tr className='campus' key={campus.id}>
-                                    <th ><a href={`/#/campuses/${campus.id}`}>{campus.name}</a></th>
+                                    <th ><button>X</button><a href={`/#/campuses/${campus.id}`}>{campus.name}</a></th>
                                     <th>{campus.address}</th>
                                 </tr>
                             )

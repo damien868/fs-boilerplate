@@ -10,6 +10,15 @@ studentRouter.get('/',async(req,res,next)=>{
         next(err)
     }
 })
+studentRouter.get('/:id',async(req,res,next)=>{
+    try{
+        const student= await Student.findOne({where:{id:req.params.id}})
+        res.send(student)
+    }
+    catch(err){
+        next(err)
+    }
+})
 studentRouter.post('/new',async(req,res,next)=>{
     try{
         const student= await Student.create({firstName:req.body.studentFirstName,lastName:req.body.studentLastName,email:req.body.studentEmail})

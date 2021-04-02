@@ -3,7 +3,6 @@ import React from "react"
 import Campuses from './Campuses'
 import Students from './Students'
 import Home from './Home'
-import axios from 'axios'
 import {HashRouter,Route,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import SingleStudent from "./SingleStudent"
