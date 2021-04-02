@@ -5,12 +5,18 @@ const campusReducer=(state=[],action)=>{
     if(action.type==='GET_CAMPUSES'){
         return action.campuses
     }
+    else if(action.type==='CREATE_CAMPUS'){
+        return [...state,action.campus]
+    }
     return state
 }
 const studentReducer=(state=[],action)=>{
     console.log(action)
     if(action.type==='GET_STUDENTS'){
         return action.students //because action.students is an array
+    }
+    else if(action.type==='CREATE_STUDENT'){
+        return [...state,action.student]
     }
     return state
 }
@@ -26,7 +32,12 @@ const _getStudents=(students)=>{
 const _getCampuses=(campuses)=>{
     return {type:'GET_CAMPUSES',campuses}
 }
-
+const _createCampus=(campus)=>{
+    return{type:'CREATE_CAMPUS',campus}
+}
+const _createStudent=(student)=>{
+    return{type:'CREATE_STUDENT',student}
+}
 // a thunk is a function that returns a function which takes in dispatch as an argument. 
 //Dispatch is a function which you pass in the action creator. 
 // In this function, you need to grab whatever data you need to pass into the action creator
@@ -42,8 +53,20 @@ const getCampuses=()=>{
         dispatch(_getCampuses(data))
     }
 }
+const createCampus=(campusName,campusAddress,campusDescription)=>{
+    return async(dispatch)=>{
+        const{data}=await axios.post('/campus/new',{campusName,campusAddress,campusDescription}) //2nd argument is the object with values you pass in
+        dispatch(_createCampus(data)) //dispatches the object
+    }
+}
+const createStudent=(studentFirstName,studentLastName,studentEmail)=>{
+    return async(dispatch)=>{
+        const {data}=await axios.post('/student/new',{studentFirstName,studentLastName,studentEmail})
+        dispatch(_createStudent(data))
+    }
+}
 const store=createStore(reducer,applyMiddleware(thunks)) //createStore expects one argument which is the reducer. 
 
 
 export default store
-export {getStudents,getCampuses}
+export {getStudents,getCampuses,createCampus,createStudent}

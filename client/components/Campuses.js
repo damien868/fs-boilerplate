@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 
+
  class Campuses extends React.Component {
         render(){
             return(
@@ -9,18 +10,20 @@ import {connect} from 'react-redux'
                 <div>
                     <div className='heading'>Campus Directory</div>
                 <table>
-                    <tr>
-                        <th>Campus Name</th>
-                        <th>Campus Address</th>
-                    </tr>
-                    {this.props.campuses.map(campus=>{
-                        return(
-                            <tr className='campus' key={campus.id}>
-                                <th ><a href={`/#/campuses/${campus.id}`}>{campus.name}</a></th>
-                                <th>{campus.address}</th>
-                            </tr>
-                        )
-                    })}                
+                    <tbody>
+                        <tr>
+                            <th>Campus Name</th>
+                            <th>Campus Address</th>
+                        </tr>
+                        {this.props.campuses.map(campus=>{
+                            return(
+                                <tr className='campus' key={campus.id}>
+                                    <th ><a href={`/#/campuses/${campus.id}`}>{campus.name}</a></th>
+                                    <th>{campus.address}</th>
+                                </tr>
+                            )
+                        })}    
+                    </tbody>            
                 </table>
             </div>                 
         : <div>Loading</div>)   

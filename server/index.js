@@ -12,6 +12,7 @@ const {db,syncAndSeed}=require('./db')
 app.use(morgan('dev')) //need the dev string in here, morgan needs to be invoked with dev passed in!
 
 //use express.json()
+app.use(express.json())
 //use express.static() MAKE SURE THE PATH TO YOUR PUBLIC FOLDER IS RIGHT!
 app.use(express.static(path.join(__dirname, './public'))) //tells code public folder exists
 //require in your routes and use them on your api path

@@ -9,6 +9,8 @@ import {connect} from 'react-redux'
 import SingleStudent from "./SingleStudent"
 import SingleCampus from "./SingleCampus"
 import {getStudents,getCampuses} from '../store/store'
+import NewCampus from './NewCampus'
+import NewStudent from './NewStudent'
 
 //reducer function tells you what the initial state of the store is
 // reducer is given two arguments, state and action
@@ -85,7 +87,8 @@ class App extends React.Component {
 							<div><Link to='/'>Home</Link></div>
 							<div><Link to='/students'>All Students</Link></div>
 						</div> 
-						<Campuses/> 
+						<Campuses/>
+						<NewCampus/> 
 					</Route> {/*react-router v5 syntax*/}
 					<Route path='/campuses/:id'>
 						<div className='navbar'>
@@ -100,6 +103,7 @@ class App extends React.Component {
 							<div><Link to='/campuses'>All Campuses</Link></div>
 						</div> 
 						<Students/> 
+						<NewStudent/>
 					</Route> {/*react-router v5 syntax*/}
 					<Route path='/students/:id'> 
 						<div className='navbar'>
@@ -116,7 +120,7 @@ class App extends React.Component {
 const mapDispatchToProps=(dispatch)=>{ //returns object which contains list of functions
 	return {
 		getStudents:()=>{dispatch(getStudents())},
-		getCampuses:()=>{dispatch(getCampuses())}
+		getCampuses:()=>{dispatch(getCampuses())},
 	}
 }
 export default connect(null,mapDispatchToProps)(App) // App will only connect once you export it so you cannot use Provider here
