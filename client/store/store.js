@@ -83,9 +83,9 @@ const deleteCampus=()=>{
         dispatch(_deleteCampus(data))
     }
 }
-const deleteStudent=()=>{
+const deleteStudent=(id)=>{
     return async(dispatch)=>{
-        const{data}=await axios.delete('/student/delete',{})
+        const{data}=await axios.delete(`/student/${id}`,{})
         dispatch(_deleteStudent(data))
     }
 }
