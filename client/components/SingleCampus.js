@@ -1,19 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const SingleCampus=({campus})=>{
-    console.log(campus)
-    if(!campus){
-        return null
+class SingleCampus extends React.Component{
+    constructor(){
+        super()
     }
-    return(
-            <div>
-                <div>{`Name: ${campus.name}`}</div>
-                <div>{`Address: ${campus.address}`}</div>
-                <div>{`Image: ${campus.imageURL}`}</div>
-                <div>{`Description: ${campus.description}`}</div>
-            </div>
-        )
+    
+    render(){
+        if(!this.props.campus){
+             return null
+    }
+        return(
+                <div>
+                    <div>{`Name: ${this.props.campus.name}`}</div>
+                    <div>{`Address: ${this.props.campus.address}`}</div>
+                    <div>{`Image: ${this.props.campus.imageURL}`}</div>
+                    <div>{`Description: ${this.props.campus.description}`}</div>
+                </div>
+            )
+    }
 }
 
 const mapStateToProps = (state,ownProps)=>{
@@ -26,5 +31,6 @@ const mapStateToProps = (state,ownProps)=>{
     })
     
 }
+
 
 export default connect(mapStateToProps)(SingleCampus)

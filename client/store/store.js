@@ -9,6 +9,9 @@ const campusReducer=(state=[],action)=>{
         return [...state,action.campus]
     }
     else if(action.type==='DELETE_CAMPUS'){
+        return state.filter(campus=>campus.id !== action.id) //return all values of the array that don't match the id you are removing
+    }
+    else if(action.type==='UPDATE_CAMPUS'){
         return [...state,action.campus]
     }
     return state
@@ -22,7 +25,7 @@ const studentReducer=(state=[],action)=>{
         return [...state,action.student]
     }
     else if(action.type==='DELETE_STUDENT'){
-        return [...state,action.student]
+        return state.filter(student=>student.id !== action.id) //return all values of the array that don't match the id you are removing
     }
     return state
 }
@@ -44,11 +47,14 @@ const _createCampus=(campus)=>{
 const _createStudent=(student)=>{
     return{type:'CREATE_STUDENT',student}
 }
-const _deleteCampus=(campus)=>{
-    return{type:'DELETE_CAMPUS',campus}
+const _deleteCampus=(id)=>{
+    return{type:'DELETE_CAMPUS',id}
 }
-const _deleteStudent=(student)=>{
-    return{type:'DELETE_STUDENT',student}
+const _deleteStudent=(id)=>{
+    return{type:'DELETE_STUDENT',id}
+}
+const _updateCampus=(campus)=>{
+    return{type:'UPDATE_CAMPUS',campus}
 }
 // a thunk is a function that returns a function which takes in dispatch as an argument. 
 //Dispatch is a function which you pass in the action creator. 
@@ -77,20 +83,26 @@ const createStudent=(studentFirstName,studentLastName,studentEmail)=>{
         dispatch(_createStudent(data))
     }
 }
-const deleteCampus=()=>{
+const deleteCampus=(id)=>{
     return async(dispatch)=>{
-        const{data}=await axios.delete('/campus/delete',{})
-        dispatch(_deleteCampus(data))
+        await axios.delete(`/campus/${id}`,{})
+        dispatch(_deleteCampus(id))
     }
 }
 const deleteStudent=(id)=>{
     return async(dispatch)=>{
-        const{data}=await axios.delete(`/student/${id}`,{})
-        dispatch(_deleteStudent(data))
+        await axios.delete(`/student/${id}`,{})
+        dispatch(_deleteStudent(id))
+    }
+}
+const updateCampus=(name,address,description,image,id)=>{
+    return async(dispatch)=>{
+        const{data}=await axios.post(`/campus/${id}`,{name,address,description,image})
+        dispatch(_updateCampus(data))
     }
 }
 const store=createStore(reducer,applyMiddleware(thunks)) //createStore expects one argument which is the reducer. 
 
 
 export default store
-export {getStudents,getCampuses,createCampus,createStudent,deleteCampus,deleteStudent}
+export {getStudents,getCampuses,createCampus,createStudent,deleteCampus,deleteStudent,updateCampus}

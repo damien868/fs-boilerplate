@@ -22,7 +22,7 @@ studentRouter.get('/:id',async(req,res,next)=>{
 studentRouter.delete('/:id',async(req,res,next)=>{
     try{
         const student= await Student.destroy({where:{id:req.params.id}})
-        res.send(student)
+        res.sendStatus(204)
     }
     catch(err){
         next(err)

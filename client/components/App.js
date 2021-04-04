@@ -10,6 +10,7 @@ import SingleCampus from "./SingleCampus"
 import {getStudents,getCampuses} from '../store/store'
 import NewCampus from './NewCampus'
 import NewStudent from './NewStudent'
+import UpdateCampus from './UpdateCampus'
 
 //reducer function tells you what the initial state of the store is
 // reducer is given two arguments, state and action
@@ -57,11 +58,6 @@ class App extends React.Component {
 	}
 	//any lifecycle methods
 	async componentDidMount(){
-        // let response=await axios.get(`/campus`)
-        // const allCampus=response.data
-		// response=await axios.get(`/student`)
-		// const allStudent=response.data
-		// store.dispatch({type:'UPDATE',students:allStudent,campuses:allCampus})
 		this.props.getStudents()
 		this.props.getCampuses()
 	}
@@ -95,6 +91,7 @@ class App extends React.Component {
 							<div><Link to='/students'>All Students</Link></div>
 						</div> 
 						<SingleCampus/> 
+						<UpdateCampus/> 
 					</Route> {/*react-router v5 syntax*/}
 					<Route exact path='/students'> 
 						<div className='navbar'>
@@ -109,7 +106,7 @@ class App extends React.Component {
 							<div><Link to='/'>Home</Link></div>
 							<div><Link to='/campuses'>All Campuses</Link></div>
 						</div> 
-						<SingleStudent/> 
+						<SingleStudent/>
 					</Route> {/*react-router v5 syntax*/}
 				</HashRouter>
 		)
