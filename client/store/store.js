@@ -14,7 +14,7 @@ const campusReducer=(state=[],action)=>{
     else if(action.type==='UPDATE_CAMPUS'){
         return [...state,action.campus]
     }
-    return state 
+    return state
 }
 const studentReducer=(state=[],action)=>{
     console.log(action)
