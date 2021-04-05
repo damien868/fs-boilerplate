@@ -37,5 +37,20 @@ studentRouter.post('/new',async(req,res,next)=>{
         next(err)
     }
 })
+studentRouter.post('/:id',async(req,res,next)=>{
+    try{
+        console.log(req.body)
+        const student=await Student.findOne({where:{id:req.params.id}})
+        student.firstName=req.body.firstName
+        student.lastName=req.body.lastName
+        student.email=req.body.email
+        student.imageURL=req.body.profilePicture
+        await student.save()
+        res.status(201).send(student)
+    }
+    catch(err){
+        next(err)
+    }
+})
 
 module.exports=studentRouter

@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 class SingleCampus extends React.Component{
     constructor(){
         super()
+        this.state={
+            updated:false
+        }
     }
     
     render(){

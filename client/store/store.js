@@ -27,6 +27,9 @@ const studentReducer=(state=[],action)=>{
     else if(action.type==='DELETE_STUDENT'){
         return state.filter(student=>student.id !== action.id) //return all values of the array that don't match the id you are removing
     }
+    else if(action.type==='UPDATE_STUDENT'){
+        return [...state,action.student]
+    }
     return state
 }
 const reducer=combineReducers({
@@ -55,6 +58,9 @@ const _deleteStudent=(id)=>{
 }
 const _updateCampus=(campus)=>{
     return{type:'UPDATE_CAMPUS',campus}
+}
+const _updateStudent=(student)=>{
+    return{type:'UPDATE_CAMPUS',student}
 }
 // a thunk is a function that returns a function which takes in dispatch as an argument. 
 //Dispatch is a function which you pass in the action creator. 
@@ -101,8 +107,14 @@ const updateCampus=(name,address,description,image,id)=>{
         dispatch(_updateCampus(data))
     }
 }
+const updateStudent=(firstName,lastName,email,profilePicture,id)=>{
+    return async(dispatch)=>{
+        const{data}=await axios.post(`/student/${id}`,{firstName,lastName,email,profilePicture})
+        dispatch(_updateStudent(data))
+    }
+}
 const store=createStore(reducer,applyMiddleware(thunks)) //createStore expects one argument which is the reducer. 
 
 
 export default store
-export {getStudents,getCampuses,createCampus,createStudent,deleteCampus,deleteStudent,updateCampus}
+export {getStudents,getCampuses,createCampus,createStudent,deleteCampus,deleteStudent,updateCampus,updateStudent}

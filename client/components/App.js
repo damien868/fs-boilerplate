@@ -11,6 +11,7 @@ import {getStudents,getCampuses} from '../store/store'
 import NewCampus from './NewCampus'
 import NewStudent from './NewStudent'
 import UpdateCampus from './UpdateCampus'
+import UpdateStudent from "./UpdateStudent"
 
 //reducer function tells you what the initial state of the store is
 // reducer is given two arguments, state and action
@@ -62,6 +63,7 @@ class App extends React.Component {
 		this.props.getCampuses()
 	}
 	
+	
 	//any custom methods
 	//render
 	render(){
@@ -107,6 +109,7 @@ class App extends React.Component {
 							<div><Link to='/campuses'>All Campuses</Link></div>
 						</div> 
 						<SingleStudent/>
+						<UpdateStudent/>
 					</Route> {/*react-router v5 syntax*/}
 				</HashRouter>
 		)
